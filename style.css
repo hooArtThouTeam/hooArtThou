@@ -21,11 +21,11 @@ body {
 }
 
 .btn::before,.btn::after{
- content:””;
+ content:"";
  position: absolute;
- width: 14px;
- height: 4px;
- background: #8a394d;
+ width: 16px;
+ height: 7px;
+ background: #ddd5d5;
  transform: skewX(50deg);
  transition: .4s linear;
 }

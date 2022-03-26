@@ -1,15 +1,6 @@
-<!-- 
-  Use Emmet shortcuts to even faster experience.
-  For an example: type div#root and press Tab.
--->
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
- <body>
+<html>
+<body>
 
 <h1>
     <Center>Art Tinder &#128512;</Center>  
@@ -21,20 +12,24 @@
     <p>Right swipe to see more about it.</p>
 </Center>
 <Center>
-    <a href="https://lh3.googleusercontent.com/C5NIJZH6eev-wWvRly_d5v0QUbnoN1hkd_-6gA06lYyyDiUyzhqw3vstdiwE0f7BHqdP-VPNOsp28is1gq0VtW-SYDQvM1n0GS9uvAXju7_aZ8U2qUYIv7iHeqqNdRxR2YUQNUKExw=w2400?source=screenshot.guru"> <img src="https://lh3.googleusercontent.com/C5NIJZH6eev-wWvRly_d5v0QUbnoN1hkd_-6gA06lYyyDiUyzhqw3vstdiwE0f7BHqdP-VPNOsp28is1gq0VtW-SYDQvM1n0GS9uvAXju7_aZ8U2qUYIv7iHeqqNdRxR2YUQNUKExw=w600-h315-p-k" /> </a>
+    <a href="https://lh3.googleusercontent.com/C5NIJZH6eev-wWvRly_d5v0QUbnoN1hkd_-6gA06lYyyDiUyzhqw3vstdiwE0f7BHqdP-VPNOsp28is1gq0VtW-SYDQvM1n0GS9uvAXju7_aZ8U2qUYIv7iHeqqNdRxR2YUQNUKExw=w2400?source=screenshot.guru"> <img src="https://lh3.googleusercontent.com/C5NIJZH6eev-wWvRly_d5v0QUbnoN1hkd_-6gA06lYyyDiUyzhqw3vstdiwE0f7BHqdP-VPNOsp28is1gq0VtW-SYDQvM1n0GS9uvAXju7_aZ8U2qUYIv7iHeqqNdRxR2YUQNUKExw=w600-h315-p-k" id = "monalisa"/> </a>
 </Center>
-</Center>
-<left>
-    <button type="button">Nah</button>
-</left>
-<right>
-    <button type="button">Yes!!!!</button>
-</right>
-</Center>
-<script>
-function myFunction() {
-  document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
-}
-</script>
+<input type="button" onclick="changeImg()" value="Yes!!!" />
+<input type="button" onclick="changeImg(" value = "Nah" />
+    <script>
+        function changeImg() {
+            var image = document.getElementById('monalisa');
+            if (image.src.match("img source")) {
+                image.src = "img";
+            }
+            else {
+                image.src = "https://lh3.googleusercontent.com/2MPvAAqdlCurMrq7q2q3hU6_Bk9hKOk0NHT8OP2MmBCsoYOGKxd2hS164xV4k6ZtGGpTFORCOwXYRkYqTtAz1ZeGLgYBPSUrRRYbh3SsfJnQrD5iMXK09zi3-7C95nhJHtDvrTAi8A=w580-h315-p-k";
+            }
+        }
+    </script>
+
+
 </body>
 </html>
+
+

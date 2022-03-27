@@ -146,7 +146,11 @@ let testImg20 = {url:"https://lh3.googleusercontent.com/_RRJrd4GIoAYwISKJR3tQcDG
         }
 
         function calculateResults(){
-          if(surCount+abCount+expCount+impCount+realCount === 0){ //if user didnt like any art
+           if(surCount+abCount+expCount+impCount+realCount === 20){
+             document.getElementById("resultType").innerHTML = "<Center> You love all art! </Center>";
+             
+             document.getElementById("resultDescription").innerHTML = "<Center> You're a jack of all trades, a true connoisseur. Maybe you should retake the quiz and be more of a critic! </Center>";
+          }else if(surCount+abCount+expCount+impCount+realCount === 0){ //if user didnt like any art
              document.getElementById("resultType").innerHTML = "<Center> You hate art! </Center>";
              
              document.getElementById("resultDescription").innerHTML = "<Center> You didn't like any of the art we showed you! sad :( </Center>";

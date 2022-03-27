@@ -1,3 +1,5 @@
+# The images are generated with google photos
+
 let testImg1 = {url:"https://lh3.googleusercontent.com/L49VuF2I15JsAGIoB0wisnz0dfsaSP1KnWLAwVe3Ck0p8h7ev8otJX165YeDiFtjO46OCvd9Iz_py3aln1O1LHNqp-2A7-iLQElQ3ZmvxKFgqB5cQqxif6LgzF4vJI_5j4Vj2xXFmQ=w2400", title:"The Sun", artist:"Edvard Munch", type:"expressionism"}
 
 let testImg2 = {url:"https://lh3.googleusercontent.com/c3Q8dKZ9VoeUr7hVaYVzcIWRybq8S_FlcH-yTCkWi4svIjUBjkXFIyhDpra6CeCrwOQZdtCrOKJkdZJL0ZSwoAf1Pz9ZTgoHzEmQA8qhW0TPgvPSFHu0ND_XnsaMDmQ_tVVBYDzG7g=w2400", title:"View of Collioure", artist:"Henri Matisse", type:"expressionism"}

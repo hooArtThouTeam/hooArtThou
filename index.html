@@ -1,46 +1,210 @@
-<!-- 
-  Use Emmet shortcuts to even faster experience.
-  For an example: type div#root and press Tab
--->
 <!DOCTYPE html>
-<style>
-body {
-  background-image: url('https://live.staticflickr.com/216/478083244_b417c1badd_b.jpg');
-}
-</style>
 <html>
 <body>
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-  </head>
+
+
+
 <h1>
-    <Center>Art Tinder &#128512;</Center>  
+    <Center>HOO Art Thou?</Center>  
 </h1>
-<h2>
-    <Center>Mona Lisa with a goatee</Center>
+
+<div id = "intro">
+  <h2> <Center> This quiz will show you twenty art pieces of various art styles. Click whether you like the art at the bottom of the screen, and we will tell you your favorite art style, as well as what that tells about you! Click the button below to start! </Center>
+  <br>
+  <Center> <input type = "button" onclick = "start()" value = "HOO art thou?" /> </Center>
+</div>
+
+<div style = "display:none" id = "swiper">
+<h2 id = "imageName">
+    <Center> You should not see this title </Center>
 </h2>
+
+
 <Center>
-    <p>Right swipe to see more about it.</p>
+    <p id = "artist">you should not see this artist</p>
 </Center>
 <Center>
-    <a href="https://lh3.googleusercontent.com/C5NIJZH6eev-wWvRly_d5v0QUbnoN1hkd_-6gA06lYyyDiUyzhqw3vstdiwE0f7BHqdP-VPNOsp28is1gq0VtW-SYDQvM1n0GS9uvAXju7_aZ8U2qUYIv7iHeqqNdRxR2YUQNUKExw=w2400?source=screenshot.guru"> <img src="https://lh3.googleusercontent.com/C5NIJZH6eev-wWvRly_d5v0QUbnoN1hkd_-6gA06lYyyDiUyzhqw3vstdiwE0f7BHqdP-VPNOsp28is1gq0VtW-SYDQvM1n0GS9uvAXju7_aZ8U2qUYIv7iHeqqNdRxR2YUQNUKExw=w600-h315-p-k" id = "monalisa"/> </a>
+<input type="button" onclick="yes()" value="Yes!!!" /> <input type="button" onclick="no()" value = "Nah" />
 </Center>
-<input type="button" onclick="changeImg()" value="Yes!!!" />
-<input type="button" onclick="changeImg(" value = "Nah" />
+<br>
+<Center>
+    <a> <img src="" id = "visual"/> </a>
+</Center>
+
+
+</div>
+
+
+
+<div style="display:none" id = "results">
+ <h2> <Center> Results: </Center> </h2> 
+ <h2 id = "resultType"> <Center>  </Center> </h2>
+ <p id = "resultDescription"> <Center>  </Center> </p>
+</div>
+
+
     <script>
-        function changeImg() {
-            var image = document.getElementById('monalisa');
-            if (image.src.match("img source")) {
-                image.src = "img";
+       var realCount = 0;
+       var abCount = 0;
+       var expCount = 0;
+       var impCount = 0; 
+       var surCount = 0;
+
+       var currImg = 0;
+       
+       let testImg1 = {url:"https://lh3.googleusercontent.com/L49VuF2I15JsAGIoB0wisnz0dfsaSP1KnWLAwVe3Ck0p8h7ev8otJX165YeDiFtjO46OCvd9Iz_py3aln1O1LHNqp-2A7-iLQElQ3ZmvxKFgqB5cQqxif6LgzF4vJI_5j4Vj2xXFmQ=w2400", title:"The Sun", artist:"Edvard Munch", type:"expressionism"}
+
+let testImg2 = {url:"https://lh3.googleusercontent.com/c3Q8dKZ9VoeUr7hVaYVzcIWRybq8S_FlcH-yTCkWi4svIjUBjkXFIyhDpra6CeCrwOQZdtCrOKJkdZJL0ZSwoAf1Pz9ZTgoHzEmQA8qhW0TPgvPSFHu0ND_XnsaMDmQ_tVVBYDzG7g=w2400", title:"View of Collioure", artist:"Henri Matisse", type:"expressionism"}
+
+let testImg3 = {url:"https://lh3.googleusercontent.com/8bgnRiUvvPzDm4JyjnIsEVpVhHgaiX-cp12GOMFzzuMJbuawJ_f5mV9B5FFtti8cXqXmifTYdexow5Iq8uaaFhY3gtZLXnyuSpD6cIcm857BcLbLDOA-24MMMiyf6TmwYlV31S79jw=w2400", title:"Oleanders", artist:"Vincent Van Gogh", type:"expressionism"}
+
+let testImg4 = {url:"https://lh3.googleusercontent.com/q8_nPy55-dBdQ36KcHk_6Q5OEQYU_0r6WNB7EGe7152-vIp8W9C-dszTaFw7IyqnDgKr4CHWTOB8lSEp1JQ3JFdugMUEaOaLq-pwTRfrhQYKIGn8KVvQxKBwa24xrhGrn1wc0ihitQ=w2400", title:"Yellow Cow", artist:"Franz Marc", type:"expressionism"}
+
+let testImg5 = {url:"https://lh3.googleusercontent.com/2Gt1oEltG8r_1yUlMrMDK7dAjTQOjuvdKhvRIbaotsVldDoC0t8rwyJDBkV7zkE8fquFkDD1K7ZkfAQLaSssh11D87QzBBGtCvIGweYKzxp9swsJuSf2Jls2sEC5gz0UFrJmUhl9SA=w2400", title:"La Grenouillere", artist:"Claude Monet", type:"impressionism"}
+
+let testImg6 = {url:"https://lh3.googleusercontent.com/oZqHfZVpEAEi1MGOqMki8DVmgM9HTNFkNipoo1R8AFNsWribcSJbN8g3tLYW75Mc3Dy2YF0fjh032pMh9UoWBL2vF2RU1km02-z5XwmHIsUBY8xvU8xHf_9ms5bB94GklELOtlZHRw=w2400", title:"Still Life with Peaches", artist:"Auguste Renoir", type:"impressionism"}
+
+let testImg7 = {url:"https://lh3.googleusercontent.com/3OGopPoF-3OIMajvL0brdFz7VAyoziA700L7RHFb9w2i_qWAATxrAjZ4RqdJA2g58jezsrBTwnmCVt8ccyOWfty381jgHhWXzEZN28gnGdgU3rH8stoyzOl0LFNnVHGUFXzvu4vzwA=w2400", title:"Dort or Dordrecht", artist:"J.M.W. Turner", type:"impressionism"}
+
+let testImg8 = {url:"https://lh3.googleusercontent.com/uKW7VySYMoCeu_ErKkHGcRdQ1ejvmlzkXqej8W5ttdUhyzJF8BBy4F6Gn0n_9Qapfotyxa5t-kI0spC1o6ozR_zA74iegHrPaPyyfTTK8c8FcuiIE5cMgfGsitfQjyw90smHhwRERQ=w2400", title:"Child In a Straw Hat", artist:"Mary Cassatt", type:"impressionism"}
+
+let testImg9 = {url:"https://lh3.googleusercontent.com/xMQ1whwy9p11V6ktp04HK-7qNzkSiKafy-EwkpU8FW79kWmtsZu6thfw0l_44da-BnwtZAAWMiwVYGHf4N2ft0aoh0ruq4zyTJiChKzWWPJbvMrsVtckYBpyKfV-dQ598U0c4OhrkA=w2400", title:"A Bar at the Folies-Bergère", artist:"Edouard Manet", type:"realism"}
+
+let testImg10 = {url:"https://lh3.googleusercontent.com/m7w7IBeVa0OX8n85G-Aws66Nh29qVqQXnAPhmvbl9BAZuo9l_OP1V5r9vwjHGEVZkU0S6nC8izt9azw8Z-TGHacPK7gUy0iRDY2SetFh58QcjTHKB90lbkGlR4-Vsk2imEdIbRkuJw=w2400", title:"The Artist's Studio", artist:"Gustave Courbet", type:"realism"}
+
+let testImg11 = {url:"https://lh3.googleusercontent.com/UO3TXlCbCjXDk7dQzKGOrRz_o6BvnVJBQdYTjqscqs1e05nJrCJqWef-ha_dzYhNjSsEQUugzf9ICosyFfBiLiK9x3jumEk94h72II0HnXwhJyf4o1Td4T7zst5tSTARX-8xPv_n4g=w2400", title:"The Gross Clinic", artist:"Thomas Eakins", type:"realism"}
+
+let testImg12 = {url:"https://lh3.googleusercontent.com/0H0bzzKzX247eUckmIDH8qYoT3HWQ1X6dtEZg-7rlxwgc8Yb99_OFIKA6Gig41zoxERIlBPbzfXIaIdGgkWYxVDeQUWXLrVKIYuwNCSZNEKgL5rugHySxqSGT9MAPlcwCX5jDf8NvA=w2400", title:"A Peasant Girl Knitting", artist:"Jules Breton", type:"realism"}
+
+let testImg13 = {url:"https://lh3.googleusercontent.com/DbM1EyCmcMBBn5fsD95WBRBr0d9aHYD1MEhEh4MKysAKnqUKFBTrcdr8vguaEuYBGzZ31mJofoOfFF95tT45I7Y6exgh-prfJ8to6UCJBnmp8-S-QPNhhSz3kVuOQP8NYHs-5GwUDA=w2400", title:"The Art of Living", artist:"Rene Magritte", type:"surrealism"}
+
+let testImg14 = {url:"https://lh3.googleusercontent.com/T-BX12NxPBoi4ZYvbklw-yg_dCRUysE8j1MyigRXAJMZwy42CP9Oyxhiex8B2uHhTQcvnXKinvo6KZQl5Dz-9Im86H49JeFmBT_Jp4cq_ismN5ACE0A2ezcYqKKpbeSg4--HKdoFng=w2400", title:"Painting and Film", artist:"Dali", type:"surrealism"}
+
+let testImg15 = {url:"https://lh3.googleusercontent.com/2vwrwnlAn07LnFymHhgjRYsCeOlSfpPBhvvNSLP-5yvX6cwQ81nIGMODi1WlZ2Ni7O8UZuZPQqNkx68rERdtcc87uhi-H_immM3TOM3KRskUO4uEdJTEuxtfY2TeAlSbe-U574v7Iw=w2400", title:"The Disquieting Muses", artist:"Giorgio Chirico", type:"surrealism"}
+
+let testImg16 = {url:"https://lh3.googleusercontent.com/4bxwJ2JYpKzT-eIwpgEOPOyRi76e31Ran9IDsgY6hTJo81wWY3OB4YGfom_btdr00OZ9OSp3olpYj-OC8Adh12-HKJgXE5f3g9-PJJ20zK0cfXZArp__xlp_j5HemFVizv-jEdN7iQ=w2400", title:"Azure Sky", artist:"Yves Tanguy", type:"surrealism"}
+
+
+let testImg17 = {url:"https://lh3.googleusercontent.com/A8H3a5jqIxA5Pkrt2uXKu2p45XoKmXV_zG-VbTl0MRvJ6Q4FgWyfrdyomJcxBcExJKjos09s199LqeseTURdIl8TLAgLi_ehT3qFZDX9DVSo2dde_jiBDq4smGHfk_DYkhNh1UB-tA=w2400", title:"Orange and Tan", artist:"Mark Rothko", type:"abstract"}
+
+let testImg18 = {url:"https://lh3.googleusercontent.com/tXcEv7v9VaI3bnaWXL4rxp0iqLkR3xEKSkkkufBdG9VjC9GSj-JPQY36HPwbmQ_WL26KBtF3P0KylMQ39wO2tmh-oN9f7yUnhI1ET9R27wKnLx2lTa3i2HOCnfztELenpAzl_Amuew=w2400", title:"Mountain and Sea", artist:"Helen Frankenthaler", type:"abstract"}
+
+let testImg19 = {url:"https://lh3.googleusercontent.com/nok6-YrYSH3snI0NFwoRe0J4pyhwZHYf6ZFpdGYfoqvOOgWijou03mvgaB64mEjASr-T86ueYZ8jGuw4aQNw53Ko214h-kIZJj_tY_IVhMryAog0VfN_zXtkbOMriKOTA-61Xdd9wA=w2400", title:"Rhythm", artist:"Sonia Delaunay", type:"abstract"}
+
+let testImg20 = {url:"https://lh3.googleusercontent.com/_RRJrd4GIoAYwISKJR3tQcDGbwajyf4zkeCYmSW-SjagSj5yrglsvS9JG4HUeW4OSGVOVPtCzb2V3TSZu2HbAy7mMi6I0PZi8bPS2Q9cGft4jeBfLcPgYOyUBPM-WyMUvKZZG_wPgA=w2400", title:"Ambigu-B", artist:"Victor Vasarely", type:"abstract"}
+
+       let imgs = [testImg1, testImg2, testImg3, testImg4, testImg5, testImg6, testImg7, testImg8, testImg9, testImg10, testImg11, testImg12, testImg13, testImg14, testImg15, testImg16, testImg17, testImg18, testImg19, testImg20]
+
+
+
+        function start() {
+          
+          currImg = 0;
+          changeImg();
+
+          var swiper = document.getElementById("swiper")
+          swiper.style.display = "block"
+          document.getElementById("intro").style.display = "none"
+        }
+
+        function changeImg() {//changes title, desc
+            if(currImg === 20) {//end of array
+
+              calculateResults();
+              var swiper = document.getElementById("swiper");
+              swiper.style.display = "none"
+
+              var results = document.getElementById("results");
+              results.style.display = "block"
+
+
             }
-            else {
-                image.src = "https://lh3.googleusercontent.com/2MPvAAqdlCurMrq7q2q3hU6_Bk9hKOk0NHT8OP2MmBCsoYOGKxd2hS164xV4k6ZtGGpTFORCOwXYRkYqTtAz1ZeGLgYBPSUrRRYbh3SsfJnQrD5iMXK09zi3-7C95nhJHtDvrTAi8A=w580-h315-p-k";
+            else{
+              var image = document.getElementById('visual')
+              image.src = imgs[currImg].url; //this is where the next image would go 
+              var title = document.getElementById('imageName');
+              title.innerHTML =  "<Center>" + imgs[currImg].title + "</Center>";
+              var author = document.getElementById('artist');
+              author.innerHTML = "<Center>" + imgs[currImg].artist + "</Center>";
+              
+
+          
+
+
+          
+             //currImg++;
             }
         }
-    </script>
 
+        function yes(){
+          var type = imgs[currImg].type
+          if(type === "surrealism")surCount++
+          else if(type === "abstract") abCount++
+          else if(type === "expressionism") expCount++
+          else if(type === "impressionism") impCount++
+          else if(type === "realism") realCount++
+          currImg++;
+
+          console.log(surCount)
+          console.log(abCount)
+          console.log(expCount)
+          console.log(impCount)
+          console.log(realCount)
+          console.log(" ")
+           
+          changeImg();
+        }
+
+        function no() {
+          currImg++;
+          changeImg();
+
+        }
+
+        function calculateResults(){
+          if(surCount+abCount+expCount+impCount+realCount === 0){ //if user didnt like any art
+             document.getElementById("resultType").innerHTML = "<Center> You hate art! </Center>";
+             
+             document.getElementById("resultDescription").innerHTML = "<Center> You didn't like any of the art we showed you! sad :( </Center>";
+             
+          }else{
+            var biggest = realCount;
+            if(biggest<abCount) biggest = abCount;
+            if(biggest<expCount) biggest = expCount;
+            if(biggest<impCount) biggest = impCount;
+            if(biggest<surCount) biggest = surCount;
+
+            if(biggest === realCount){
+              document.getElementById("resultType").innerHTML = "<Center> Realism </Center>";
+             
+             document.getElementById("resultDescription").innerHTML = "<Center> You prefer realist art! Realist art is very detailed and realistic. The colors tend to be muted and not as intense. You are a very pragmatic, down to earth, and rational person. You think with your head, not your heart </Center>";
+            }else if(biggest === abCount){
+              document.getElementById("resultType").innerHTML = "<Center> Abstraction </Center>";
+             
+             document.getElementById("resultDescription").innerHTML = "<Center> You prefer abstract art! Abstract art doesn’t attempt to represent reality, but rather uses various shapes, colors, forms, and gestural marks to achieve its effect. You are a very unique person who thinks outside of the box. You are open to new experiences. You stand for your own values and virtues. </Center>";
+            }else if(biggest === expCount){
+              document.getElementById("resultType").innerHTML = "<Center> Expressionism </Center>";
+             
+             document.getElementById("resultDescription").innerHTML = "<Center> You prefer expressionist art! Expressionist art has highly intense colors and very free and textured brushwork. People who like expressionist art tend to be very thoughtful, pragmatic, and traditional. You are in touch with your feelings and do what you like. </Center>";
+            }else if(biggest === surCount){
+              document.getElementById("resultType").innerHTML = "<Center> Surrealism </Center>";
+             
+             document.getElementById("resultDescription").innerHTML = "<Center> You prefer surrealist art! Surrealism aims to revolutionize the human experience and explore the workings of the human mind. It challenges the values and the current norms in the search for freedom. You are a very open and unique person who is ahead of the curve and loves testing norms. </Center>";
+            }else if(biggest === impCount){
+              document.getElementById("resultType").innerHTML = "<Center> Impressionism </Center>";
+             
+             document.getElementById("resultDescription").innerHTML = "<Center> You prefer impressionist art! Impression art focuses on light and color, and the shifting pattern of the natural scene. You’re a very agreeable and conscientious person. You value tradition and are less open to new experiences. </Center>";
+            }else{
+              document.getElementById("resultType").innerHTML = "<Center> didnt work </Center>";
+             
+             document.getElementById("resultDescription").innerHTML = "<Center> didnt work </Center>";
+            }
+          }
+        }
+
+        
+    </script>
+        
 
 </body>
 </html>
